@@ -24,13 +24,17 @@
 */
 #include <stdio.h>
 /************ Begin %include sections from the grammar ************************/
-%%
+#line 1 "example1.y"
+
+	#include <iostream>
+	#include "example1.h"
+	using namespace std;
+#line 33 "example1.cpp"
 /**************** End of %include directives **********************************/
 /* These constants specify the various numeric values for terminal symbols
 ** in a format understandable to "makeheaders".  This section is blank unless
 ** "lemon" is run with the "-m" command-line option.
 ***************** Begin makeheaders token definitions *************************/
-%%
 /**************** End makeheaders token definitions ***************************/
 
 /* The next sections is a series of control #defines.
@@ -84,7 +88,31 @@
 # define INTERFACE 1
 #endif
 /************* Begin control #defines *****************************************/
-%%
+#define YYCODETYPE unsigned char
+#define YYNOCODE 10
+#define YYACTIONTYPE unsigned char
+#define ParseTOKENTYPE  int 
+typedef union {
+  int yyinit;
+  ParseTOKENTYPE yy0;
+} YYMINORTYPE;
+#ifndef YYSTACKDEPTH
+#define YYSTACKDEPTH 100
+#endif
+#define ParseARG_SDECL
+#define ParseARG_PDECL
+#define ParseARG_FETCH
+#define ParseARG_STORE
+#define YYNSTATE             10
+#define YYNRULE              6
+#define YY_MAX_SHIFT         9
+#define YY_MIN_SHIFTREDUCE   11
+#define YY_MAX_SHIFTREDUCE   16
+#define YY_MIN_REDUCE        17
+#define YY_MAX_REDUCE        22
+#define YY_ERROR_ACTION      23
+#define YY_ACCEPT_ACTION     24
+#define YY_NO_ACTION         25
 /************* End control #defines *******************************************/
 
 /* The yyzerominor constant is used to initialize instances of
@@ -156,7 +184,32 @@ static const YYMINORTYPE yyzerominor = { 0 };
 **  yy_default[]       Default action for each state.
 **
 *********** Begin parsing tables **********************************************/
-%%
+#define YY_ACTTAB_COUNT (16)
+static const YYACTIONTYPE yy_action[] = {
+ /*     0 */    17,    3,    4,    1,    2,   24,    5,    1,    2,    6,
+ /*    10 */    16,    7,   19,   19,    8,    9,
+};
+static const YYCODETYPE yy_lookahead[] = {
+ /*     0 */     0,    1,    2,    3,    4,    7,    8,    3,    4,    8,
+ /*    10 */     5,    8,    9,    9,    8,    8,
+};
+#define YY_SHIFT_USE_DFLT (-1)
+#define YY_SHIFT_COUNT (9)
+#define YY_SHIFT_MIN   (0)
+#define YY_SHIFT_MAX   (5)
+static const signed char yy_shift_ofst[] = {
+ /*     0 */     5,    5,    5,    5,    5,    0,    4,    4,    4,    4,
+};
+#define YY_REDUCE_USE_DFLT (-3)
+#define YY_REDUCE_COUNT (4)
+#define YY_REDUCE_MIN   (-2)
+#define YY_REDUCE_MAX   (7)
+static const signed char yy_reduce_ofst[] = {
+ /*     0 */    -2,    1,    3,    6,    7,
+};
+static const YYACTIONTYPE yy_default[] = {
+ /*     0 */    23,   23,   23,   23,   23,   23,   21,   20,   19,   18,
+};
 /********** End of lemon-generated parsing tables *****************************/
 
 /* The next table maps tokens (terminal symbols) into fallback tokens.  
@@ -175,7 +228,6 @@ static const YYMINORTYPE yyzerominor = { 0 };
 */
 #ifdef YYFALLBACK
 static const YYCODETYPE yyFallback[] = {
-%%
 };
 #endif /* YYFALLBACK */
 
@@ -258,7 +310,9 @@ void ParseTrace(FILE *TraceFILE, char *zTracePrompt){
 /* For tracing shifts, the names of all terminals and nonterminals
 ** are required.  The following table supplies these names */
 static const char *const yyTokenName[] = { 
-%%
+  "$",             "PLUS",          "MINUS",         "DIVIDE",      
+  "TIMES",         "INTEGER",       "error",         "program",     
+  "expr",        
 };
 #endif /* NDEBUG */
 
@@ -266,7 +320,12 @@ static const char *const yyTokenName[] = {
 /* For tracing reduce actions, the names of all rules are required.
 */
 static const char *const yyRuleName[] = {
-%%
+ /*   0 */ "program ::= expr",
+ /*   1 */ "expr ::= expr MINUS expr",
+ /*   2 */ "expr ::= expr PLUS expr",
+ /*   3 */ "expr ::= expr TIMES expr",
+ /*   4 */ "expr ::= expr DIVIDE expr",
+ /*   5 */ "expr ::= INTEGER",
 };
 #endif /* NDEBUG */
 
@@ -357,7 +416,6 @@ static void yy_destructor(
     ** inside the C code.
     */
 /********* Begin destructor definitions ***************************************/
-%%
 /********* End destructor definitions *****************************************/
     default:  break;   /* If no destructor action specified: do nothing */
   }
@@ -528,7 +586,6 @@ static void yyStackOverflow(yyParser *yypParser, YYMINORTYPE *yypMinor){
    /* Here code is inserted which will execute if the parser
    ** stack every overflows */
 /******** Begin %stack_overflow code ******************************************/
-%%
 /******** End %stack_overflow code ********************************************/
    ParseARG_STORE; /* Suppress warning about unused %extra_argument var */
 }
@@ -597,7 +654,12 @@ static const struct {
   YYCODETYPE lhs;         /* Symbol on the left-hand side of the rule */
   unsigned char nrhs;     /* Number of right-hand side symbols in the rule */
 } yyRuleInfo[] = {
-%%
+  { 7, 1 },
+  { 8, 3 },
+  { 8, 3 },
+  { 8, 3 },
+  { 8, 3 },
+  { 8, 1 },
 };
 
 static void yy_accept(yyParser*);  /* Forward Declaration */
@@ -637,7 +699,45 @@ static void yy_reduce(
   **     break;
   */
 /********** Begin reduce actions **********************************************/
-%%
+      case 0: /* program ::= expr */
+#line 16 "example1.y"
+{ cout << "Result = " << yymsp[0].minor.yy0 << "\n" <<endl;}
+#line 706 "example1.cpp"
+        break;
+      case 1: /* expr ::= expr MINUS expr */
+#line 18 "example1.y"
+{ yygotominor.yy0 = yymsp[-2].minor.yy0 - yymsp[0].minor.yy0; cout<<"执行减法-->"<<"yymsp[-2].minor.yy0:"<<yymsp[-2].minor.yy0<<"yymsp[0].minor.yy0:"<<yymsp[0].minor.yy0<< "\n"<<endl;}
+#line 711 "example1.cpp"
+        break;
+      case 2: /* expr ::= expr PLUS expr */
+#line 20 "example1.y"
+{ yygotominor.yy0 = yymsp[-2].minor.yy0 + yymsp[0].minor.yy0;cout<<"执行加法-->"<<"yymsp[-2].minor.yy0"<<yymsp[-2].minor.yy0<<"c:"<<yymsp[0].minor.yy0<< "\n"<<endl; }
+#line 716 "example1.cpp"
+        break;
+      case 3: /* expr ::= expr TIMES expr */
+#line 22 "example1.y"
+{ yygotominor.yy0 = yymsp[-2].minor.yy0 * yymsp[0].minor.yy0; cout<<"执行乘法-->"<<yymsp[-2].minor.yy0<<"yymsp[0].minor.yy0:"<<yymsp[0].minor.yy0<< "\n"<<endl;}
+#line 721 "example1.cpp"
+        break;
+      case 4: /* expr ::= expr DIVIDE expr */
+#line 25 "example1.y"
+{ 
+	if(yymsp[0].minor.yy0 != 0){
+		yygotominor.yy0 = yymsp[-2].minor.yy0 / yymsp[0].minor.yy0;
+	}else{
+		std:cout << "divide by zeor" << std::endl;
+	}
+	cout<<"执行除法-->"<<endl;
+}
+#line 733 "example1.cpp"
+        break;
+      case 5: /* expr ::= INTEGER */
+#line 34 "example1.y"
+{ yygotominor.yy0 = yymsp[0].minor.yy0; }
+#line 738 "example1.cpp"
+        break;
+      default:
+        break;
 /********** End reduce actions ************************************************/
   };
   assert( yyruleno>=0 && yyruleno<sizeof(yyRuleInfo)/sizeof(yyRuleInfo[0]) );
@@ -684,7 +784,6 @@ static void yy_parse_failed(
   /* Here code is inserted which will be executed whenever the
   ** parser fails */
 /************ Begin %parse_failure code ***************************************/
-%%
 /************ End %parse_failure code *****************************************/
   ParseARG_STORE; /* Suppress warning about unused %extra_argument variable */
 }
@@ -701,7 +800,11 @@ static void yy_syntax_error(
   ParseARG_FETCH;
 #define TOKEN (yyminor.yy0)
 /************ Begin %syntax_error code ****************************************/
-%%
+#line 11 "example1.y"
+
+	cout << "Syntax error!\n" << endl;
+	exit(1);
+#line 808 "example1.cpp"
 /************ End %syntax_error code ******************************************/
   ParseARG_STORE; /* Suppress warning about unused %extra_argument variable */
 }
@@ -722,7 +825,6 @@ static void yy_accept(
   /* Here code is inserted which will be executed whenever the
   ** parser accepts */
 /*********** Begin %parse_accept code *****************************************/
-%%
 /*********** End %parse_accept code *******************************************/
   ParseARG_STORE; /* Suppress warning about unused %extra_argument variable */
 }
@@ -916,3 +1018,17 @@ void Parse(
 #endif
   return;
 }
+#line 36 "example1.y"
+
+	int main()
+	{
+		void* pParser = ParseAlloc(malloc);
+		Parse(pParser,INTEGER,1);
+		Parse(pParser,PLUS,0);
+		Parse(pParser,INTEGER,2);
+		Parse(pParser,0,0);
+		ParseFree(pParser,free);
+
+
+	}
+#line 1035 "example1.cpp"
