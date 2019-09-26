@@ -1,6 +1,6 @@
 %include {
 	#include <iostream>
-	#include "example4.h"
+	#include "calculator.h"
 	#include <ctype.h>
 	#include <math.h>
 	#include <stdlib.h>

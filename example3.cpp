@@ -24,10 +24,10 @@
 */
 #include <stdio.h>
 /************ Begin %include sections from the grammar ************************/
-#line 1 "calculator.y"
+#line 1 "example3.y"
 
 	#include <iostream>
-	#include "calculator.h"
+	#include "example3.h"
 	#include <ctype.h>
 	#include <math.h>
 	#include <stdlib.h>
@@ -35,24 +35,11 @@
 	#define NUMBER 20
 	using namespace std;
 
-	struct Symbol {
-		char *name;
+	struct Token {
 		double value;
-		double (*funcptr)(double);
-		double (*funcptr2)(double,double);
+		unsigned n;
 	};
-
-	union Token {
-		Symbol * symt;
-		double value;
-	};
-
-	void token_destructor(Token t)
-	{
-		cout <<"In token_destructor t.value = " << t.value <<endl;
-	}
-
-#line 56 "calculator.cpp"
+#line 43 "example3.cpp"
 /**************** End of %include directives **********************************/
 /* These constants specify the various numeric values for terminal symbols
 ** in a format understandable to "makeheaders".  This section is blank unless
@@ -112,13 +99,13 @@
 #endif
 /************* Begin control #defines *****************************************/
 #define YYCODETYPE unsigned char
-#define YYNOCODE 20
+#define YYNOCODE 17
 #define YYACTIONTYPE unsigned char
 #define ParseTOKENTYPE  Token 
 typedef union {
   int yyinit;
   ParseTOKENTYPE yy0;
-  Token yy30;
+  Token yy2;
 } YYMINORTYPE;
 #ifndef YYSTACKDEPTH
 #define YYSTACKDEPTH 100
@@ -127,16 +114,16 @@ typedef union {
 #define ParseARG_PDECL
 #define ParseARG_FETCH
 #define ParseARG_STORE
-#define YYNSTATE             26
-#define YYNRULE              16
-#define YY_MAX_SHIFT         25
-#define YY_MIN_SHIFTREDUCE   32
-#define YY_MAX_SHIFTREDUCE   47
-#define YY_MIN_REDUCE        48
-#define YY_MAX_REDUCE        63
-#define YY_ERROR_ACTION      64
-#define YY_ACCEPT_ACTION     65
-#define YY_NO_ACTION         66
+#define YYNSTATE             18
+#define YYNRULE              13
+#define YY_MAX_SHIFT         17
+#define YY_MIN_SHIFTREDUCE   22
+#define YY_MAX_SHIFTREDUCE   34
+#define YY_MIN_REDUCE        35
+#define YY_MAX_REDUCE        47
+#define YY_ERROR_ACTION      48
+#define YY_ACCEPT_ACTION     49
+#define YY_NO_ACTION         50
 /************* End control #defines *******************************************/
 
 /* The yyzerominor constant is used to initialize instances of
@@ -208,44 +195,37 @@ static const YYMINORTYPE yyzerominor = { 0 };
 **  yy_default[]       Default action for each state.
 **
 *********** Begin parsing tables **********************************************/
-#define YY_ACTTAB_COUNT (56)
+#define YY_ACTTAB_COUNT (37)
 static const YYACTIONTYPE yy_action[] = {
- /*     0 */     9,   10,    7,    8,    6,    9,   10,    7,    8,    6,
- /*    10 */    46,   48,    2,    5,    5,   47,   65,    1,   33,   19,
- /*    20 */    20,    4,    4,   45,   45,    9,   10,    7,    8,    6,
- /*    30 */     9,   10,    7,    8,    6,   44,    7,    8,    6,   25,
- /*    40 */    15,   11,    3,   13,   12,   14,   21,    6,   22,   23,
- /*    50 */     3,   35,   24,   17,   18,   16,
+ /*     0 */     7,    8,    5,    6,    4,   35,    9,    3,   33,    5,
+ /*    10 */     6,    4,   23,    2,    4,   34,    3,    7,    8,    5,
+ /*    20 */     6,    4,    2,   13,   34,   49,    1,   14,   37,   25,
+ /*    30 */    37,   17,   10,   15,   16,   11,   12,
 };
 static const YYCODETYPE yy_lookahead[] = {
- /*     0 */     1,    2,    3,    4,    5,    1,    2,    3,    4,    5,
- /*    10 */    11,    0,   13,    2,    2,   11,   15,   16,    7,    8,
- /*    20 */     8,   10,   10,   12,   12,    1,    2,    3,    4,    5,
- /*    30 */     1,    2,    3,    4,    5,   11,    3,    4,    5,   17,
- /*    40 */    18,    9,   10,   18,   18,   18,   18,    5,   18,   18,
- /*    50 */    10,    7,   18,   18,   18,   18,
+ /*     0 */     1,    2,    3,    4,    5,    0,   15,    2,    9,    3,
+ /*    10 */     4,    5,    7,    8,    5,   10,    2,    1,    2,    3,
+ /*    20 */     4,    5,    8,   15,   10,   12,   13,   15,   16,    7,
+ /*    30 */    16,   14,   15,   15,   15,   15,   15,
 };
 #define YY_SHIFT_USE_DFLT (-2)
-#define YY_SHIFT_COUNT (25)
+#define YY_SHIFT_COUNT (17)
 #define YY_SHIFT_MIN   (-1)
-#define YY_SHIFT_MAX   (44)
+#define YY_SHIFT_MAX   (22)
 static const signed char yy_shift_ofst[] = {
- /*     0 */    -2,   11,   12,   12,   12,   12,   12,   12,   12,   12,
- /*    10 */    12,   12,   -1,    4,   24,   29,   29,   33,   33,   32,
- /*    20 */    40,   42,   42,   42,   42,   44,
+ /*     0 */    -2,    5,   14,   14,   14,   14,   14,   14,   14,   -1,
+ /*    10 */    16,    6,    6,    9,    9,    9,    9,   22,
 };
-#define YY_REDUCE_USE_DFLT (-1)
-#define YY_REDUCE_COUNT (11)
-#define YY_REDUCE_MIN   (0)
-#define YY_REDUCE_MAX   (37)
+#define YY_REDUCE_USE_DFLT (-10)
+#define YY_REDUCE_COUNT (8)
+#define YY_REDUCE_MIN   (-9)
+#define YY_REDUCE_MAX   (21)
 static const signed char yy_reduce_ofst[] = {
- /*     0 */     1,   22,   25,   26,   27,   28,   30,   31,   34,   35,
- /*    10 */    36,   37,
+ /*     0 */    13,   17,   -9,    8,   12,   18,   19,   20,   21,
 };
 static const YYACTIONTYPE yy_default[] = {
- /*     0 */    50,   64,   64,   64,   64,   64,   64,   64,   64,   64,
- /*    10 */    64,   64,   64,   64,   64,   53,   52,   55,   54,   64,
- /*    20 */    64,   59,   58,   57,   56,   64,
+ /*     0 */    37,   48,   48,   48,   48,   48,   48,   48,   48,   48,
+ /*    10 */    39,   41,   40,   45,   44,   43,   42,   48,
 };
 /********** End of lemon-generated parsing tables *****************************/
 
@@ -349,9 +329,8 @@ void ParseTrace(FILE *TraceFILE, char *zTracePrompt){
 static const char *const yyTokenName[] = { 
   "$",             "PLUS",          "MINUS",         "DIVIDE",      
   "TIMES",         "POW",           "NOT",           "NEWLINE",     
-  "NAME",          "EQ",            "LP",            "RP",          
-  "NUM",           "COMMA",         "error",         "main",        
-  "in",            "program",       "expr",        
+  "LP",            "RP",            "NUM",           "error",       
+  "main",          "in",            "program",       "expr",        
 };
 #endif /* NDEBUG */
 
@@ -363,18 +342,15 @@ static const char *const yyRuleName[] = {
  /*   1 */ "in ::= in NEWLINE",
  /*   2 */ "in ::=",
  /*   3 */ "in ::= in program NEWLINE",
- /*   4 */ "program ::= NAME EQ expr",
- /*   5 */ "program ::= expr",
- /*   6 */ "expr ::= expr MINUS expr",
- /*   7 */ "expr ::= expr PLUS expr",
- /*   8 */ "expr ::= expr TIMES expr",
- /*   9 */ "expr ::= expr DIVIDE expr",
- /*  10 */ "expr ::= expr POW expr",
- /*  11 */ "expr ::= MINUS expr",
- /*  12 */ "expr ::= LP expr RP",
- /*  13 */ "expr ::= NUM",
- /*  14 */ "expr ::= NAME LP expr RP",
- /*  15 */ "expr ::= NAME LP expr COMMA expr RP",
+ /*   4 */ "program ::= expr",
+ /*   5 */ "expr ::= expr MINUS expr",
+ /*   6 */ "expr ::= expr PLUS expr",
+ /*   7 */ "expr ::= expr TIMES expr",
+ /*   8 */ "expr ::= expr DIVIDE expr",
+ /*   9 */ "expr ::= expr POW expr",
+ /*  10 */ "expr ::= MINUS expr",
+ /*  11 */ "expr ::= LP expr RP",
+ /*  12 */ "expr ::= NUM",
 };
 #endif /* NDEBUG */
 
@@ -465,26 +441,6 @@ static void yy_destructor(
     ** inside the C code.
     */
 /********* Begin destructor definitions ***************************************/
-      /* TERMINAL Destructor */
-    case 1: /* PLUS */
-    case 2: /* MINUS */
-    case 3: /* DIVIDE */
-    case 4: /* TIMES */
-    case 5: /* POW */
-    case 6: /* NOT */
-    case 7: /* NEWLINE */
-    case 8: /* NAME */
-    case 9: /* EQ */
-    case 10: /* LP */
-    case 11: /* RP */
-    case 12: /* NUM */
-    case 13: /* COMMA */
-{
-#line 32 "calculator.y"
- token_destructor((yypminor->yy0)); 
-#line 486 "calculator.cpp"
-}
-      break;
 /********* End destructor definitions *****************************************/
     default:  break;   /* If no destructor action specified: do nothing */
   }
@@ -723,22 +679,19 @@ static const struct {
   YYCODETYPE lhs;         /* Symbol on the left-hand side of the rule */
   unsigned char nrhs;     /* Number of right-hand side symbols in the rule */
 } yyRuleInfo[] = {
+  { 12, 1 },
+  { 13, 2 },
+  { 13, 0 },
+  { 13, 3 },
+  { 14, 1 },
+  { 15, 3 },
+  { 15, 3 },
+  { 15, 3 },
+  { 15, 3 },
+  { 15, 3 },
+  { 15, 2 },
+  { 15, 3 },
   { 15, 1 },
-  { 16, 2 },
-  { 16, 0 },
-  { 16, 3 },
-  { 17, 3 },
-  { 17, 1 },
-  { 18, 3 },
-  { 18, 3 },
-  { 18, 3 },
-  { 18, 3 },
-  { 18, 3 },
-  { 18, 2 },
-  { 18, 3 },
-  { 18, 1 },
-  { 18, 4 },
-  { 18, 6 },
 };
 
 static void yy_accept(yyParser*);  /* Forward Declaration */
@@ -778,131 +731,88 @@ static void yy_reduce(
   **     break;
   */
 /********** Begin reduce actions **********************************************/
-      case 1: /* in ::= in NEWLINE */
-      case 3: /* in ::= in program NEWLINE */ yytestcase(yyruleno==3);
-#line 47 "calculator.y"
-{
-  yy_destructor(yypParser,7,&yymsp[0].minor);
-}
-#line 788 "calculator.cpp"
+      case 4: /* program ::= expr */
+#line 36 "example3.y"
+{ 
+					 cout << "Result = " << yymsp[0].minor.yy2.value << "\n" <<endl;
+					 cout << "count = " << yymsp[0].minor.yy2.n <<endl;
+					}
+#line 741 "example3.cpp"
         break;
-      case 4: /* program ::= NAME EQ expr */
-#line 52 "calculator.y"
+      case 5: /* expr ::= expr MINUS expr */
+#line 41 "example3.y"
 {
-	if(yymsp[-2].minor.yy0.symt->funcptr || yymsp[-2].minor.yy0.symt->funcptr2)
-	{
-		cout << yymsp[-2].minor.yy0.symt->name<<"is a function! Must type in rightside!\n"<<endl;
-		yymsp[-2].minor.yy0.symt->value = 0.0;
+									 yygotominor.yy2.value = yymsp[-2].minor.yy2.value - yymsp[0].minor.yy2.value;
+									 yygotominor.yy2.n = yymsp[-2].minor.yy2.n + 1 + yymsp[0].minor.yy2.n + 1;
+									 cout<<"执行减法-->"<<"b:"<<yymsp[-2].minor.yy2.value<<"c:"<<yymsp[0].minor.yy2.value<< "\n"<<endl;
+									}
+#line 750 "example3.cpp"
+        break;
+      case 6: /* expr ::= expr PLUS expr */
+#line 47 "example3.y"
+{ 
+									yygotominor.yy2.value = yymsp[-2].minor.yy2.value + yymsp[0].minor.yy2.value;
+									yygotominor.yy2.n = yymsp[-2].minor.yy2.n + 1 + yymsp[0].minor.yy2.n + 1;
+									cout<<"执行加法-->"<<"b"<<yymsp[-2].minor.yy2.value<<"c:"<<yymsp[0].minor.yy2.value<< "\n"<<endl;
+								  }
+#line 759 "example3.cpp"
+        break;
+      case 7: /* expr ::= expr TIMES expr */
+#line 53 "example3.y"
+{
+									 yygotominor.yy2.value = yymsp[-2].minor.yy2.value * yymsp[0].minor.yy2.value;
+									 yygotominor.yy2.n = yymsp[-2].minor.yy2.n + 1 + yymsp[0].minor.yy2.n + 1;
+									 cout<<"执行乘法-->"<<yymsp[-2].minor.yy2.value<<"c:"<<yymsp[0].minor.yy2.value<< "\n"<<endl;
+									 }
+#line 768 "example3.cpp"
+        break;
+      case 8: /* expr ::= expr DIVIDE expr */
+#line 60 "example3.y"
+{ 
+	if(yymsp[0].minor.yy2.value != 0){
+		yygotominor.yy2.value = yymsp[-2].minor.yy2.value / yymsp[0].minor.yy2.value;
+		yygotominor.yy2.n = yymsp[-2].minor.yy2.n + 1 + yymsp[0].minor.yy2.n + 1;
 	}else{
-		yymsp[-2].minor.yy0.symt->value = yymsp[0].minor.yy30.value;
+		std:cout << "divide by zeor" << std::endl;
 	}
-  yy_destructor(yypParser,9,&yymsp[-1].minor);
+	cout<<"执行除法-->"<<endl;
 }
-#line 802 "calculator.cpp"
+#line 781 "example3.cpp"
         break;
-      case 5: /* program ::= expr */
-#line 62 "calculator.y"
-{cout << "= " << yymsp[0].minor.yy30.value - C.value ;}
-#line 807 "calculator.cpp"
-        break;
-      case 6: /* expr ::= expr MINUS expr */
-#line 64 "calculator.y"
-{yygotominor.yy30.value = yymsp[-2].minor.yy30.value + yymsp[0].minor.yy30.value;  yy_destructor(yypParser,2,&yymsp[-1].minor);
-}
-#line 813 "calculator.cpp"
-        break;
-      case 7: /* expr ::= expr PLUS expr */
-#line 66 "calculator.y"
-{yygotominor.yy30.value = yymsp[-2].minor.yy30.value + yymsp[0].minor.yy30.value;  yy_destructor(yypParser,1,&yymsp[-1].minor);
-}
-#line 819 "calculator.cpp"
-        break;
-      case 8: /* expr ::= expr TIMES expr */
-#line 68 "calculator.y"
-{yygotominor.yy30.value = yymsp[-2].minor.yy30.value * yymsp[0].minor.yy30.value;  yy_destructor(yypParser,4,&yymsp[-1].minor);
-}
-#line 825 "calculator.cpp"
-        break;
-      case 9: /* expr ::= expr DIVIDE expr */
-#line 71 "calculator.y"
+      case 9: /* expr ::= expr POW expr */
+#line 70 "example3.y"
 {
-    if(yymsp[0].minor.yy30.value != 0)
-    {
-     yygotominor.yy30.value = yymsp[-2].minor.yy30.value / yymsp[0].minor.yy30.value;
-    }else{
-        cout << "divide by zero\n" <<endl;
-        exit(1);
-    }
-  yy_destructor(yypParser,3,&yymsp[-1].minor);
-}
-#line 839 "calculator.cpp"
+								yygotominor.yy2.value = pow(yymsp[-2].minor.yy2.value,yymsp[0].minor.yy2.value);
+								}
+#line 788 "example3.cpp"
         break;
-      case 10: /* expr ::= expr POW expr */
-#line 81 "calculator.y"
-{yygotominor.yy30.value = pow(yymsp[-2].minor.yy30.value,yymsp[0].minor.yy30.value);  yy_destructor(yypParser,5,&yymsp[-1].minor);
-}
-#line 845 "calculator.cpp"
-        break;
-      case 11: /* expr ::= MINUS expr */
-#line 83 "calculator.y"
-{yygotominor.yy30.value = -yymsp[0].minor.yy30.value;  yy_destructor(yypParser,2,&yymsp[-1].minor);
-}
-#line 851 "calculator.cpp"
-        break;
-      case 12: /* expr ::= LP expr RP */
-#line 85 "calculator.y"
-{yygotominor.yy30.value = yymsp[-1].minor.yy30.value;  yy_destructor(yypParser,10,&yymsp[-2].minor);
-  yy_destructor(yypParser,11,&yymsp[0].minor);
-}
-#line 858 "calculator.cpp"
-        break;
-      case 13: /* expr ::= NUM */
-#line 88 "calculator.y"
+      case 10: /* expr ::= MINUS expr */
+#line 74 "example3.y"
 {
-                if(yymsp[0].minor.yy0.symt->funcptr || yymsp[0].minor.yy0.symt->funcptr2)
-                {
-                    cout<< yymsp[0].minor.yy0.symt->name<<" is a function! Must type like "<<yymsp[0].minor.yy0.symt->name<< " ( number )!"<<endl;
-                    yygotominor.yy30.value = 0.0;
-                }else{
-                    yygotominor.yy30.value = yymsp[0].minor.yy0.symt->value;
-                }
-        }
-#line 871 "calculator.cpp"
+								 yygotominor.yy2.value = - yymsp[0].minor.yy2.value;
+								}
+#line 795 "example3.cpp"
         break;
-      case 14: /* expr ::= NAME LP expr RP */
-#line 98 "calculator.y"
+      case 11: /* expr ::= LP expr RP */
+#line 77 "example3.y"
 {
-            if(yymsp[-3].minor.yy0.symt->funcptr)
-            {
-                yygotominor.yy30.value = (yymsp[-3].minor.yy0.symt->funcptr) (yymsp[-1].minor.yy30.value);
-            }else{
-                cout << yymsp[-3].minor.yy0.symt->name << " function undifined!";
-                exit(1);
-            }
-          yy_destructor(yypParser,10,&yymsp[-2].minor);
-  yy_destructor(yypParser,11,&yymsp[0].minor);
-}
-#line 886 "calculator.cpp"
+							yygotominor.yy2.value = yymsp[-1].minor.yy2.value;
+						 }
+#line 802 "example3.cpp"
         break;
-      case 15: /* expr ::= NAME LP expr COMMA expr RP */
-#line 108 "calculator.y"
-{
-                if(yymsp[-5].minor.yy0.symt->funcptr2)
-                {
-                    yygotominor.yy30.value = (yymsp[-5].minor.yy0.symt->funcptr2) (yymsp[-3].minor.yy30.value,yymsp[-1].minor.yy30.value);
-                }else{
-                    cout << yymsp[-5].minor.yy0.symt->name<<" function undifined! "<<endl;
-                    yygotominor.yy30.value = yymsp[-5].minor.yy0.symt->value;
-                }
-              yy_destructor(yypParser,10,&yymsp[-4].minor);
-  yy_destructor(yypParser,13,&yymsp[-2].minor);
-  yy_destructor(yypParser,11,&yymsp[0].minor);
-}
-#line 902 "calculator.cpp"
+      case 12: /* expr ::= NUM */
+#line 82 "example3.y"
+{ 
+							yygotominor.yy2.value = yymsp[0].minor.yy0.value;
+							yygotominor.yy2.n = yymsp[0].minor.yy0.n + 1;
+ 						}
+#line 810 "example3.cpp"
         break;
       default:
       /* (0) main ::= in */ yytestcase(yyruleno==0);
+      /* (1) in ::= in NEWLINE */ yytestcase(yyruleno==1);
       /* (2) in ::= */ yytestcase(yyruleno==2);
+      /* (3) in ::= in program NEWLINE */ yytestcase(yyruleno==3);
         break;
 /********** End reduce actions ************************************************/
   };
@@ -966,11 +876,11 @@ static void yy_syntax_error(
   ParseARG_FETCH;
 #define TOKEN (yyminor.yy0)
 /************ Begin %syntax_error code ****************************************/
-#line 41 "calculator.y"
+#line 26 "example3.y"
 
-	cout<< "Syntax error!\n"<<endl;
+	cout << "Syntax error!\n" << endl;
 	exit(1);
-#line 974 "calculator.cpp"
+#line 884 "example3.cpp"
 /************ End %syntax_error code ******************************************/
   ParseARG_STORE; /* Suppress warning about unused %extra_argument variable */
 }
@@ -991,10 +901,10 @@ static void yy_accept(
   /* Here code is inserted which will be executed whenever the
   ** parser accepts */
 /*********** Begin %parse_accept code *****************************************/
-#line 37 "calculator.y"
+#line 22 "example3.y"
 
 	printf("parsing complete!\n");
-#line 998 "calculator.cpp"
+#line 908 "example3.cpp"
 /*********** End %parse_accept code *******************************************/
   ParseARG_STORE; /* Suppress warning about unused %extra_argument variable */
 }
@@ -1188,249 +1098,160 @@ void Parse(
 #endif
   return;
 }
-#line 117 "calculator.y"
+#line 87 "example3.y"
 
 
-static int getToken(const char *z,int *tokenType)
-{
-    int i,c;
-    
-    switch(*z){
-        case '\n':
-        {
-            *tokenType = NEWLINE;
-            return 1;
-        }
-        case '-':
-        {
-             *tokenType = MINUS;
-            return 1;
-        }
-         case '+':
-        {
-             *tokenType = PLUS;
-            return 1;
-        }
-         case '*':
-        {
-             *tokenType = PLUS;
-            return 1;
+	static int getToken(const char *z,int *tokenType)
+	{
+		int i,c;
 
-        }
-         case '/':
-        {
-             *tokenType = DIVIDE;
-            return 1;
+		switch(*z){
+			case '\n':
+			{
+				*tokenType = NEWLINE;
+				return 1;
+			}
+			case '-':
+			{
+				*tokenType = MINUS;
+				return 1;
+			}
+			case '+':
+			{
+				*tokenType = PLUS;
+				return 1;
+			}
+			case '*':
+			{
+				*tokenType = TIMES;
+				return 1;
+			}
+			case '/':
+			{
+				*tokenType = DIVIDE;
+				return 1;
+			}
+			case '^':
+			{
+				*tokenType = POW;
+				return 1;
+			}
+			case '(':
+			{
+				*tokenType = LP;
+				return 1;
+			}
+			case ')':
+			{
+				*tokenType = RP;
+				return 1;
+			}
+			case '0': case '1':	case '2': case '3':	case '4':
+			case '5': case '6':	case '7': case '8':	case '9':
+			{
+				for(i=1;isdigit(z[i]);i++){}
+				if( z[i] == '.' && isdigit(z[i+1])){
+					i += 2;
+					while(isdigit(z[i]))
+					{
+						i++;
+					}
+				}
+				*tokenType = NUM;
+				return i;
+			}
+			default:
+			{
+				*tokenType = -1;
+				return 1;
+			}
+		}
+	}
 
-        } 
-          case '^':
-        {
-             *tokenType = POW;
-            return 1;
-        }
-          case '(':
-        {
-             *tokenType = LP;
-            return 1;
+	static char* getstring(char *z,int n)
+	{
+		char *paz;
+		paz = (char *)malloc(n+1);
+		if( paz==0 )
+		{
+			fprintf(stderr,"out of memory\n");
+			exit(1);
+		}
 
-        }
-          case ')':
-        {
-             *tokenType = RP;
-            return 1;
-        }
-           case '=':
-        {
-             *tokenType = EQ;
-            return 1;
-        }
-           case ',':
-        {
-             *tokenType = COMMA;
-            return 1;
-        }
-        case 'A':   case 'B':  case 'C':    case 'D':   case 'E':   case: 'F': 
-        case 'G':   case 'H':  case 'I':    case 'J':   case 'K':   case: 'L': 
-        case 'M':   case 'N':  case 'O':    case 'P':   case 'Q':   case: 'R': 
-        case 'S':   case 'T':  case 'U':    case 'V':   case 'W':   case: 'X': 
-        case 'Y':   case 'Z':
-        case 'a':   case 'b':  case 'c':    case 'd':   case 'e':   case: 'f': 
-        case 'g':   case 'h':  case 'i':    case 'j':   case 'k':   case: 'l': 
-        case 'm':   case 'n':  case 'o':    case 'p':   case 'q':   case: 'r': 
-        case 's':   case 't':  case 'u':    case 'v':   case 'w':   case: 'x': 
-        case 'y':   case 'z':
-        {
-            for ( i = 1;isalnum(z[i]) || z[i] == '_';i++ ){}
-            *tokenType = NAME;
-            return i;
-        }
-        case '0':   case '1':  case '2':    case '3':   case '4':   case: '5': 
-        case '6':   case '7':  case '8':    case '9':
-        {
-            for(i=1; isdigit(z[i]);i++){}
-            if(z[i]=='.' && isdigit[z[i+1]])
-            {
-                i += 2;
-                while( isdigit(z[i]) )
-                {
-                    i++;
-                }
-            }
-            *tokenType = NUM;
-            return i;
-        }
+		strncpy(paz,z,n);
+		paz[n] = '\0';
+		return paz;
 
-        default:
-        {
-            *tokenType = -1;
-            return 1;
-        }
+	}
 
+	int main()
+	{
 
-    }
-}
+		FILE *f;
 
-static char* getstring(char *z,int n)
-{
-    char *paz;
-    paz = (char *)malloc(n+1);
-    if(paz == 0)
-    {
-        fprintf(stderr,"out of memory\n");
-        exit(1);
-    }
-    strncpy(paz,z,n);
-    paz[n]='\0';
-    return paz;
-}
+		f = fopen("record.txt","w");
+		ParseTrace(f,"");
 
-static Symbol* symlook (char* s,Symbol* symtab)
-{
-    struct Symbol* sp;
-    for(sp = symtab; sp < &symtab[NUMBER];sp++)
-    {
-        if (sp->name && !strcmp(sp->name,s))
-        {
-            return sp;
-        }
+		struct Token* t0;
+		int n;
+		char *z;
+		int* tokenType;
+		t0 = (Token *)malloc(sizeof(Token));
+		if(t0==0)
+		{
+			fprintf(stderr,"out of memory\n");
+			exit(1);
+		}
 
-        if(!sp->name)
-        {
-            sp->name = s;
-            return sp;
-        }
-    }
+		t0->value = 0.0;
+		t0->n = 0;
 
-    cout << "Too many symbols!" << endl;
-    exit(1);
+		tokenType = (int*)malloc(sizeof(int));
+		if(tokenType==0 )
+		{
+			fprintf(stderr,"out of memory\n");
+			exit(1);
+		}
 
-}
+		z = (char*)malloc(1024);
+		if(z==0){
+			fprintf(stderr,"out of memory\n");
+		}
 
-static void addfunc(char* name,double (*func)(double x),Symbol* symtab)
-{
-    struct Symbol* sp = symlook(name,symtab);
-    sp->funcptr = func;
-}
-
-static void addfunc2(char* name,double (*func)(double x,double x),Symbol* symtab)
-{
-    struct Symbol* sp = symlook(name,symtab);
-    sp->funcptr2 = func;
-}
-
-static double localabs(double x)
-{
-    if (x > 0.0)
-        { return x; }
-    else
-        {return -x; }
-}
-
-int main()
-{
-    FILE *f;
-    f = fopen("record.txt","w");
-    ParseTrace(f,"");
-    union Token *t0;
-    int n;
-    char* z;
-    int* tokenType;
-
-    struct Symbol symtab[NUMBER];
-    for(int i = 0;i<NUMBER;I++)
-    {
-        symtab[i].value = 0.0;
-        symtab[i].name = NULL;
-        symtab[i].funcptr = NULL;
-        symtab[i].funcptr2 = NULL;
-    }
-
-    addfunc("exp",exp,symtab);
-    addfunc("log",log,symtab);
-    addfunc("sqrt",sqrt,symtab);
-    addfunc("localabs",localabs,symtab);
-    addfunc("hypot",localabs,symtab);
-    addfunc("hypot",hypot,symtab);
-    addfunc2("hypot",hypot,symtab);
-
-    t0 =(Token *) malloc(sizeof(Token));
-    if( t0==0 )
-    {
-        fprintf(stderr,"out of memory\n");
-        exit(1);
-    }
-    t0->value = 0.0;
-    t0->symt = NULL;
-
-    tokenType = (int *)malloc(sizeof(int));
-    if(tokenType == 0)
-    {
-        fprintf(stderr,"out of memory\n");
-        exit(1);
-    }
-
-    z = (char *)malloc(1024);
-    if(z == 0)
-    {
-        fprintf(stderr,"out of memory\n");
-        exit(1);
-    }
-
-    void* pParser = ParseAlloc(malloc);
-
-    while (1) {
-        gets(z);
-        if (z == "") break;
-        strcat(z,"\n");
-        while (*z)
-        {
-            n = getToken(z,tokenType);
-
-            if(*tokenType == NUM)
-            {
-                char *s = getstring(z,n);
-                t0->value = atof(s);
-            }
-
-            if(*tokenType == NAME)
-            {
-                char* s = getstring(z,n);
-                t0->symt = symlook(s,symtab);
-            }
-
-            if(*tokenType >= 0)
-            {
-                Parse(pParser,*tokenType,*t0);
-            }
-            z = z + n;
-        }
-    }
-
-    Parse(pParser,0,*t0);
-    ParseFree(pParser,free);
-    return 0;
+		void* pParser = ParseAlloc(malloc);
 
 
-}
+		while(1){
+			gets(z);
+			if(z== "") break;
+			strcat(z,"\n");
+			while(*z)
+			{
+				n = getToken(z,tokenType);
 
-#line 1437 "calculator.cpp"
+				if(*tokenType == NUM)
+				{
+					char*s = getstring(z,n);
+					t0->value = atof(s);
+				}
+
+				if(*tokenType >= 0)
+				{
+					Parse(pParser,*tokenType,*t0);
+				}
+				z = z + n;
+
+			}
+		}
+
+		Parse(pParser,0,*t0);
+
+		ParseFree(pParser,free);
+
+		ParseTrace(NULL,"");
+		fclose(f);
+		return 0;
+
+
+	}
+#line 1258 "example3.cpp"
